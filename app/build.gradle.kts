@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.stocky"
-        minSdk = 30
+        minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -61,6 +61,10 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.junit)
+    testImplementation(libs.junit.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -69,4 +73,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.room.runtime.android)
     kapt(libs.androidx.room.compiler)
+    testImplementation(kotlin("test"))
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
 }

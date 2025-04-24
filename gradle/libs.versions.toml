@@ -19,6 +19,8 @@ navigationRuntimeAndroid = "2.9.0-beta01"
 accompanist = "0.34.0"
 runtimeLivedata = "1.7.8"
 roomCompiler = "2.7.0"
+junitJupiter = "5.8.1"
+junitJunit = "4.12"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +49,8 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 accompanist-navigation-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "accompanist" }
 compose-icons-core = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "compose" }
 compose-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "compose" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
