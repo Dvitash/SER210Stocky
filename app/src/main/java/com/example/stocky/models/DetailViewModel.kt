@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.stocky.QuoteResponse
 import com.example.stocky.Stock
-import com.example.stocky.StockData
+import com.example.stocky.StockRepository
 import kotlinx.coroutines.launch
 
-class DetailViewModel(private val repository: StockData) : ViewModel() {
+class DetailViewModel(private val repository: StockRepository) : ViewModel() {
     private val _stock = MutableLiveData<Stock?>()
     val stock: LiveData<Stock?> = _stock
 

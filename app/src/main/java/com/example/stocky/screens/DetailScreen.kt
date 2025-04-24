@@ -51,7 +51,7 @@ fun DetailScreen(
 
     val factory = remember {
         val dao = AppDatabase.getDatabase(context).watchlistDao()
-        val repository = StockData(dao)
+        val repository = StockRepository(dao)
         ViewModelFactory(repository)
     }
 

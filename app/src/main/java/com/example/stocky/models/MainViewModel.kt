@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stocky.Stock
-import com.example.stocky.StockData
+import com.example.stocky.StockRepository
 import com.example.stocky.QuoteResponse
 import kotlinx.coroutines.launch
 
@@ -14,7 +14,7 @@ data class StockWithQuote(
     val quote: QuoteResponse?
 )
 
-class MainViewModel(private val repository: StockData) : ViewModel() {
+class MainViewModel(private val repository: StockRepository) : ViewModel() {
 
     private val _watchlistStocks = MutableLiveData<List<StockWithQuote>>(emptyList())
     val watchlistStocks: LiveData<List<StockWithQuote>> = _watchlistStocks

@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stocky.Stock
-import com.example.stocky.StockData
+import com.example.stocky.StockRepository
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val repository: StockData) : ViewModel() {
+class SearchViewModel(private val repository: StockRepository) : ViewModel() {
 
     private val _searchResults = MutableLiveData<List<Stock>?>()
     val searchResults: MutableLiveData<List<Stock>?> = _searchResults

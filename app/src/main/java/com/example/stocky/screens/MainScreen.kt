@@ -33,7 +33,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.stocky.AppDatabase
 import com.example.stocky.Stock
-import com.example.stocky.StockData
+import com.example.stocky.StockRepository
 import com.example.stocky.models.MainViewModel
 import com.example.stocky.ui.ViewModelFactory
 import com.example.stocky.models.StockWithQuote
@@ -53,7 +53,7 @@ fun MainScreen(
 
     val factory = remember {
         val dao = AppDatabase.getDatabase(context).watchlistDao()
-        val repository = StockData(dao)
+        val repository = StockRepository(dao)
         ViewModelFactory(repository)
     }
 

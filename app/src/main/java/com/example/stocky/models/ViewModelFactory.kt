@@ -2,13 +2,13 @@ package com.example.stocky.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.stocky.StockData
+import com.example.stocky.StockRepository
 import com.example.stocky.models.DetailViewModel
 import com.example.stocky.models.MainViewModel
 import com.example.stocky.models.SearchViewModel
 
 @Suppress("UNCHECKED_CAST")
-class ViewModelFactory(private val repository: StockData) : ViewModelProvider.Factory {
+class ViewModelFactory(private val repository: StockRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) ->

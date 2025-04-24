@@ -1,22 +1,15 @@
 package com.example.stocky
 
-import com.example.stocky.ApiInterface
-import com.example.stocky.WatchlistDao
-import com.example.stocky.Stock
-import com.example.stocky.WatchlistEntry
 import android.util.Log
-import retrofit2.Response
 
-class StockData(private val watchlistDao: WatchlistDao) {
+class StockRepository(private val watchlistDao: WatchlistDao) {
     private val api = ApiInterface.create()
 
     suspend fun searchStocks(query: String): List<Stock>? {
         val response = api.searchStocks(query)
-        Log.d("StockData", "Search Response: ${response.code()} ${response.message()} - Body: ${response.body()}")
         return if (response.isSuccessful) {
             response.body()?.result
         } else {
-            Log.e("StockData", "Search failed: ${response.errorBody()?.string()}")
             null
         }
     }
@@ -26,7 +19,7 @@ class StockData(private val watchlistDao: WatchlistDao) {
             val response = api.searchStocks(symbol)
 
             if (!response.isSuccessful) {
-                Log.e("StockData", "API search failed for $symbol: ${response.errorBody()?.string()}")
+                Log.e("StockRepository", "API search failed for $symbol: ${response.errorBody()?.string()}")
                 return null
             }
 
@@ -35,11 +28,11 @@ class StockData(private val watchlistDao: WatchlistDao) {
                 it.symbol.equals(symbol, ignoreCase = true)
             }
 
-            Log.d("StockData", "Stock match for $symbol: $matchedStock")
+            Log.d("StockRepository", "Stock match for $symbol: $matchedStock")
 
             matchedStock
         } catch (e: Exception) {
-            Log.e("StockData", "Exception during getStockDetails($symbol)", e)
+            Log.e("StockRepository", "Exception during getStockDetails($symbol)", e)
             null
         }
     }
@@ -50,14 +43,14 @@ class StockData(private val watchlistDao: WatchlistDao) {
 
             if (response.isSuccessful) {
                 val quote = response.body()
-                Log.d("StockData", "Quote for $symbol: $quote")
+                Log.d("StockRepository", "Quote for $symbol: $quote")
                 quote
             } else {
-                Log.e("StockData", "Quote failed for $symbol: ${response.errorBody()?.string()}")
+                Log.e("StockRepository", "Quote failed for $symbol: ${response.errorBody()?.string()}")
                 null
             }
         } catch (e: Exception) {
-            Log.e("StockData", "Exception during getQuote($symbol)", e)
+            Log.e("StockRepository", "Exception during getQuote($symbol)", e)
             null
         }
     }
