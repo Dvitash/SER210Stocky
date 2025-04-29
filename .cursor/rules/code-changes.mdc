@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+When modifying code, make sure to directly apply changes to the relevant file. Do not give me snippets in vanilla language within the chat window. Make sure to always be directly editing the file unless it truly makes sense to give me a small snippet of code in the chat window.

@@ -60,6 +60,8 @@ fun DetailScreen(
     val stock by viewModel.stock.observeAsState()
     val quote by viewModel.quote.observeAsState()
     val isLoading by viewModel.isLoading.observeAsState(true)
+    val sentiment by viewModel.sentiment.observeAsState()
+    val isSentimentLoading by viewModel.isSentimentLoading.observeAsState(false)
 
     LaunchedEffect(stockSymbol) {
         viewModel.loadStockDetails(stockSymbol)
@@ -111,6 +113,46 @@ fun DetailScreen(
                     }
                 }
             )
+        },
+        bottomBar = {
+            if (isSentimentLoading) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            } else {
+                sentiment?.data?.takeIf { it.isNotEmpty() }?.let { data ->
+                    val avgMspr = data.mapNotNull { it.mspr }.average()
+                    val isBuy = avgMspr > 0
+                    val cardColor = if (isBuy) Color(0xFF4CAF50) else Color(0xFFF44336)
+                    val label = if (isBuy) "BUY" else "SELL"
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = cardColor)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = label,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 22.sp
+                            )
+                        }
+                    }
+                }
+            }
         }
     ) { padding ->
         Box(

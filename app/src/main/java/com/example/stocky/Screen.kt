@@ -8,4 +8,5 @@ sealed class Screen(val route: String) {
         const val ARG_STOCK_SYMBOL = "symbol"
         val routeWithArgument = "detail/{$ARG_STOCK_SYMBOL}"
     }
+    object DeveloperInfo : Screen("developer_info")
 }

@@ -1,0 +1,40 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Developer Info Implementation
+
+A feature to display developer information in the app, accessible from the main screen via a button that opens a dedicated screen.
+
+## Completed Tasks
+
+- [x] Add Developer Info button to MainScreen top bar
+- [x] Create DeveloperInfoScreen composable with placeholder info
+- [x] Integrate navigation logic to switch between MainScreen and DeveloperInfoScreen
+
+## In Progress Tasks
+
+- [ ] Polish DeveloperInfoScreen content (add real developer info, style improvements)
+
+## Future Tasks
+
+- [ ] Add more detailed developer/contact info
+- [ ] Add app version and build info dynamically
+- [ ] Add links to GitHub or other resources
+
+## Implementation Plan
+
+- Add a button (icon) to the MainScreen top bar for developer info
+- When pressed, navigate to a new DeveloperInfoScreen composable
+- DeveloperInfoScreen displays developer name, contact, and app version
+- Integrate navigation logic (NavController or similar)
+- Polish UI and add more info as needed
+
+### Relevant Files
+
+- app/src/main/java/com/example/stocky/screens/MainScreen.kt - Main screen UI, now includes developer info button and screen composable
+- app/src/main/java/com/example/stocky/MainActivity.kt - Navigation setup, now includes DeveloperInfoScreen route
+- app/src/main/java/com/example/stocky/Screen.kt - Navigation route sealed class, now includes DeveloperInfo
+
+

@@ -9,15 +9,23 @@ import retrofit2.http.Query
 interface ApiInterface {
     @GET("search")
     suspend fun searchStocks(
-        @Query("q") query: String,
-        @Query("token") token: String = API_KEY
+            @Query("q") query: String,
+            @Query("token") token: String = API_KEY
     ): Response<SearchResponse>
 
     @GET("quote")
     suspend fun getQuote(
-        @Query("symbol") symbol: String,
-        @Query("token") token: String = API_KEY
+            @Query("symbol") symbol: String,
+            @Query("token") token: String = API_KEY
     ): Response<QuoteResponse>
+
+    @GET("stock/insider-sentiment")
+    suspend fun getInsiderSentiment(
+        @Query("symbol") symbol: String,
+        @Query("from") from: String,
+        @Query("to") to: String,
+        @Query("token") token: String = API_KEY
+    ): Response<InsiderSentimentResponse>
 
     companion object {
         private const val BASE_URL = "https://finnhub.io/api/v1/"
@@ -25,10 +33,10 @@ interface ApiInterface {
 
         fun create(): ApiInterface {
             return Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(BASE_URL)
-                .build()
-                .create(ApiInterface::class.java)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl(BASE_URL)
+                    .build()
+                    .create(ApiInterface::class.java)
         }
     }
 }

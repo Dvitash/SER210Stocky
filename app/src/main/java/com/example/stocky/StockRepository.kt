@@ -70,4 +70,19 @@ class StockRepository(private val watchlistDao: WatchlistDao) {
         return entries
     }
 
+    suspend fun getInsiderSentiment(symbol: String, from: String, to: String): InsiderSentimentResponse? {
+        return try {
+            val response = api.getInsiderSentiment(symbol, from, to)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                Log.e("StockRepository", "Insider sentiment failed for $symbol: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("StockRepository", "Exception during getInsiderSentiment($symbol)", e)
+            null
+        }
+    }
+
 }

@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Share
@@ -42,12 +43,16 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.ui.text.style.TextAlign
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     onStockClick: (String) -> Unit,
     onNavigateToSearch: () -> Unit,
+    onNavigateToDeveloperInfo: () -> Unit = {},
 ) {
     val context = LocalContext.current
 
@@ -85,6 +90,17 @@ fun MainScreen(
                                 .size(40.dp)
                                 .clip(CircleShape)
                                 .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f))
+                                .padding(8.dp)
+                        )
+                    }
+                    IconButton(onClick = onNavigateToDeveloperInfo) {
+                        Icon(
+                            imageVector = Icons.Filled.Info,
+                            contentDescription = "Developer Info",
+                            modifier = Modifier
+                                .size(40.dp)
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                                 .padding(8.dp)
                         )
                     }
@@ -270,6 +286,44 @@ fun StockCard(
             IconButton(onClick = onRemove) {
                 Icon(imageVector = Icons.Filled.Delete, contentDescription = "Remove", tint = Color.Black)
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DeveloperInfoScreen(onBack: () -> Unit = {}) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Developer Info") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                    }
+                }
+            )
+        }
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(24.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                "Stocky is developed by Daniel V and Isaias B.",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally),
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text("Version: 1.0.3")
         }
     }
 }

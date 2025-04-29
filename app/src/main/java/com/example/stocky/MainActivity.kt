@@ -47,6 +47,9 @@ fun StockyNavGraph(navController: NavHostController) {
                 },
                 onNavigateToSearch = {
                     navController.navigate(Screen.Search.route)
+                },
+                onNavigateToDeveloperInfo = {
+                    navController.navigate(Screen.DeveloperInfo.route)
                 }
             )
         }
@@ -62,6 +65,12 @@ fun StockyNavGraph(navController: NavHostController) {
             DetailScreen(
                 stockSymbol = symbol,
                 onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(route = Screen.DeveloperInfo.route) {
+            com.example.stocky.screens.DeveloperInfoScreen(
+                onBack = { navController.popBackStack() }
             )
         }
     }
