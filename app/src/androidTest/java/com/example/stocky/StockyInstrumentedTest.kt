@@ -12,27 +12,29 @@ class StockyInstrumentedTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun stockSearch() {
+        composeTestRule.waitUntilNodeCount(
+            hasTestTag("search_button"),
+            count = 1,
+            timeoutMillis = 10_000
+        )
 
-        // Navigate to search screen
         composeTestRule
-            .onNodeWithText("Add Stocks")
+            .onNodeWithTag("search_button")
             .performClick()
-            Thread.sleep(2000)
 
-        // Search for stock TSLA
         composeTestRule
-            .onNode(hasSetTextAction())
+            .onNodeWithTag("search_input")
             .performTextInput("TSLA")
-            Thread.sleep(2000)
 
-        // Verify stock is searched correctly
+        composeTestRule.waitUntil(timeoutMillis = 5_000) {
+            composeTestRule.onAllNodesWithText("TSLA").fetchSemanticsNodes().isNotEmpty()
+        }
+
         composeTestRule
             .onNodeWithText("TSLA")
             .assertExists()
-            Thread.sleep(2000)
-
-
     }
 }

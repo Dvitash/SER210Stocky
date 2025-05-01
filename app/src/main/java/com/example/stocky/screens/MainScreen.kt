@@ -47,6 +47,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -150,7 +151,10 @@ fun MainScreen(
                             fontWeight = FontWeight.Medium
                         )
                         Spacer(modifier = Modifier.height(12.dp))
-                        Button(onClick = onNavigateToSearch) {
+                        Button(
+                            onClick = onNavigateToSearch,
+                            modifier = Modifier.testTag("search_button")
+                        ) {
                             Text("Add Stocks")
                         }
                     }

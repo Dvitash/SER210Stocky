@@ -58,6 +58,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.background
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.ui.platform.testTag
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -109,7 +110,7 @@ fun SearchScreen(
                 value = query,
                 onValueChange = { query = it },
                 label = { Text("Search for a stock") },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().testTag("search_input"),
                 singleLine = true,
                 trailingIcon = {
                     if (query.isNotEmpty()) {
