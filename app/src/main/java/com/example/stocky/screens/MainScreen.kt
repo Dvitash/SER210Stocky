@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.background
@@ -40,11 +42,11 @@ import com.example.stocky.ui.ViewModelFactory
 import com.example.stocky.models.StockWithQuote
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.ui.text.style.TextAlign
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -53,6 +55,8 @@ fun MainScreen(
     onStockClick: (String) -> Unit,
     onNavigateToSearch: () -> Unit,
     onNavigateToDeveloperInfo: () -> Unit = {},
+    isDarkMode: Boolean,
+    onToggleDarkMode: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -102,6 +106,12 @@ fun MainScreen(
                                 .clip(CircleShape)
                                 .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                                 .padding(8.dp)
+                        )
+                    }
+                    IconButton(onClick = onToggleDarkMode) {
+                        Icon(
+                            imageVector = if (isDarkMode) Icons.Filled.LightMode else Icons.Filled.DarkMode,
+                            contentDescription = "Toggle Dark Mode"
                         )
                     }
                 }

@@ -6,6 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.material3.Surface
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -14,6 +18,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
 import com.example.stocky.screens.MainScreen
 import com.example.stocky.screens.SplashScreen
+import com.example.stocky.ui.theme.StockyTheme
+import com.example.stocky.screens.DeveloperInfoScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +31,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun StockyNavGraph(navController: NavHostController) {
+fun StockyNavGraph(
+    navController: NavHostController,
+    isDarkMode: Boolean,
+    onToggleDarkMode: () -> Unit
+) {
     NavHost(
         navController = navController,
         startDestination = Screen.Splash.route
@@ -50,7 +60,9 @@ fun StockyNavGraph(navController: NavHostController) {
                 },
                 onNavigateToDeveloperInfo = {
                     navController.navigate(Screen.DeveloperInfo.route)
-                }
+                },
+                onToggleDarkMode = onToggleDarkMode,
+                isDarkMode = isDarkMode
             )
         }
 
@@ -69,7 +81,7 @@ fun StockyNavGraph(navController: NavHostController) {
         }
 
         composable(route = Screen.DeveloperInfo.route) {
-            com.example.stocky.screens.DeveloperInfoScreen(
+            DeveloperInfoScreen(
                 onBack = { navController.popBackStack() }
             )
         }
@@ -80,9 +92,15 @@ fun StockyNavGraph(navController: NavHostController) {
 @Composable
 fun StockyApp() {
     val navController = rememberNavController()
-    MaterialTheme {
+    var isDarkMode by remember { mutableStateOf(false) }
+
+    StockyTheme(darkTheme = isDarkMode, dynamicColor = false) {
         Surface {
-            StockyNavGraph(navController = navController)
+            StockyNavGraph(
+                navController = navController,
+                isDarkMode = isDarkMode,
+                onToggleDarkMode = { isDarkMode = !isDarkMode }
+            )
         }
     }
 }
